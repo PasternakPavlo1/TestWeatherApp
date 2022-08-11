@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Forecast
 struct Forecast: Codable {
     struct Daily: Codable {
         let dt: Date
@@ -20,7 +21,6 @@ struct Forecast: Codable {
             let id: Int
             let description: String
             let icon: String
-
         }
         let weather: [Weather]
         let clouds: Int

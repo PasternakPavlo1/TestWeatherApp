@@ -1,12 +1,17 @@
 import Foundation
 
+// MARK: - APIService
 public class APIService {
+    
+    // MARK: - Public Propertie
     public static let shared = APIService()
     
+    // MARK: - APIError
     public enum APIError: Error {
         case error(_ errorString: String)
     }
     
+    // MARK: - getJSON
     public func getJSON<T: Decodable>(urlString: String,
                                       dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate,
                                       keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys,
@@ -15,6 +20,7 @@ public class APIService {
             completion(.failure(.error(NSLocalizedString("Error: Invalid URL", comment: ""))))
             return
         }
+        
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -26,6 +32,7 @@ public class APIService {
                 completion(.failure(.error(NSLocalizedString("Error: Data us corrupt.", comment: ""))))
                 return
             }
+            
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = dateDecodingStrategy
             decoder.keyDecodingStrategy = keyDecodingStrategy

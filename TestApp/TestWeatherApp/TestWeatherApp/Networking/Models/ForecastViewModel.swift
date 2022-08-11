@@ -7,10 +7,14 @@
 
 import Foundation
 
+// MARK: - ForecastViewModel
 struct ForecastViewModel {
+    
+    // MARK: - Properties
     let forecast: Forecast.Daily
     var system: Int
     
+    // MARK: - Private Properties
     private static var dateFormatter: DateFormatter {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E, MMM, d"
@@ -29,6 +33,7 @@ struct ForecastViewModel {
         return numberFormatter
     }
     
+    // MARK: - Method
     func convert(_ temp: Double) -> Double {
         let celsius = temp - 273.5
         if system == 0 {
@@ -38,8 +43,7 @@ struct ForecastViewModel {
         }
     }
     
-    
-    // MARK: - Computed properties
+    // MARK: - Computed Properties
     var day: String {
         return Self.dateFormatter.string(from: forecast.dt)
     }
@@ -72,5 +76,4 @@ struct ForecastViewModel {
         let urlString = "https://openweathermap.org/img/wn/\(forecast.weather[0].icon)@2x.png"
         return URL(string: urlString)!
     }
-    
 }
